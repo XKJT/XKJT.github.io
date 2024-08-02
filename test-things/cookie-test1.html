@@ -1,53 +1,70 @@
+ 
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cookie Example</title>
 <script>
-// 当页面加载完成时执行
-window.onload = function() {
-    // 读取Cookie中的div数量
-    var divCount = getCookie("divCount");
-    // 如果Cookie存在，转换为数字并添加相应数量的div
-    if (divCount) {
-        divCount = parseInt(divCount);
-        for (var i = 0; i < divCount; i++) {
-            addDiv();
-        }
+// 检查Cookie，并恢复div
+function checkAndRestoreDivs() {
+    var cookieDivs = getCookie("divs");
+    if (cookieDivs) {
+        var divs = cookieDivs.split('|');
+        divs.forEach(function(divId) {
+            addDivToPage(divId);
+        });
     }
-};
-
-// 添加div的函数
-function addDiv() {
-    // 创建新的div元素
-    var newDiv = document.createElement("div");
-    newDiv.innerHTML = "New Div";
-    newDiv.style.marginTop = "10px";
-    // 将div添加到body中
-    document.body.appendChild(newDiv);
-    
-    // 读取当前div的数量，增加1，然后更新Cookie
-    var divCount = getCookie("divCount");
-    divCount = divCount ? parseInt(divCount) + 1 : 1;
-    document.cookie = "divCount=" + divCount + "; path=/";
 }
 
-// 获取Cookie的函数
+// 添加div到页面，并更新Cookie
+function addDivToPage(divId) {
+    var newDiv = document.createElement("div");
+    newDiv.id = divId;
+    newDiv.innerHTML = "This is a new div: " + divId;
+    newDiv.style.marginTop = "10px";
+    document.body.appendChild(newDiv);
+
+    // 更新Cookie
+    var cookieDivs = getCookie("divs");
+    if (cookieDivs) {
+        cookieDivs += "|" + divId;
+    } else {
+        cookieDivs = divId;
+    }
+    setCookie("divs", cookieDivs, 30); // 设置Cookie过期时间为30天
+}
+
+// 设置Cookie
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+// 获取Cookie
 function getCookie(name) {
-    var cookieArray = document.cookie.split(';');
-    for(var i = 0; i < cookieArray.length; i++) {
-        var cookiePair = cookieArray[i].split('=');
-        if(name == cookiePair[0].trim()) {
-            return decodeURIComponent(cookiePair[1]);
-        }
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
     }
     return null;
 }
+
+// 当文档加载完毕时，检查并恢复div
+document.addEventListener("DOMContentLoaded", checkAndRestoreDivs);
 </script>
 </head>
 <body>
 
-<button onclick="addDiv()">添加div</button>
+<button onclick="addDivToPage('div' + new Date().getTime())">Add Div</button>
 
 </body>
 </html>
