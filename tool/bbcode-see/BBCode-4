@@ -1,0 +1,467 @@
+<!DCTYPE html>
+	<html>
+	<head>
+		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>BBcode预览器</title>
+		<style>
+			body{
+			
+			  margin: 0;
+			
+			  padding: 0;
+			
+			  font-size: 12px;
+			
+			  font-family: 'Microsoft YaHei', sans-serif;
+			
+			  filter: blur(px); /* 这里设置模糊度，数值越大越模糊 */
+			
+			}
+			
+			
+			
+			#qianyan {
+			
+			  border: 2px solid orange;
+			
+			  margin-top: 20px;
+			
+			  border-radius: 10px;
+			
+			  background-color: rgba(255, 255, 255, 0);
+			
+			}
+			
+			#qianyan .biaoti {
+			
+			  text-align: center;
+			
+			  color: #87ceeb;
+			
+			  /*text-shadow: 0 0 3px rgba(0, 0, 0, 0.8); 添加一个轻微的阴影以增强效果 */
+			
+			  
+			
+			}
+			
+			#qianyan .wen {
+			
+			  
+			
+			  color: #00008B
+			
+			}
+			
+			#zhengshi {
+			
+			  color: black;
+			
+			  background-color: white;
+			
+			  overflow: auto;
+			
+			  border: 2px solid orange;
+			
+			  margin-top: 20px;
+			
+			  border-radius: 10px;
+			
+			  background-color: rgba(255, 255, 255, 0);
+			
+			  
+			
+			}
+			#yulan {
+			
+			  margin-left: 20px;
+			
+			  width: calc(100% - 40px); /* 使用calc函数动态计算宽度 */
+			
+			  height: 270px; /* 或者移除min-height和max-height */
+			
+			  overflow: auto; /* 或者移除此属性 */
+			
+			  border: 2px solid #00008B;
+			
+			  border-radius: 10px;
+			
+			  background-color: rgba(255, 255, 255, 0);
+			
+			  overflow-y: auto; /* 当内容超过高度时显示垂直滚动条 */
+			
+			  word-wrap: break-word; /* 允许长单词或URL换行 */
+			
+			  white-space: pre-wrap; /* 保留空白，但允许适当换行 */
+			
+			  overflow: ;
+			
+			}
+			
+			#zhengshi .biaoti {
+			
+			  text-align: center;
+			
+			  color: #87ceeb;
+			
+			  
+			
+			 /* text-shadow: 0 0 3px rgba(0, 0, 0, 0.8); 添加一个轻微的阴影以增强效果 */
+			
+			}
+			
+			#zhengshi .anniu {
+			
+			  width: 200px; /* 设置按钮的宽度 */ 
+			
+			  height: 50px; /* 设置按钮的高度 */ 
+			
+			  padding: 10px; /* 设置内边距 */ 
+			
+			  
+			
+			  border: 1px solid #00008B; /* 设置边框样式和颜色 */ 
+			
+			  border-radius: 25px; /* 设置边框角的半径 */
+			
+			  background-color: rgba(255, 255, 255, 0);;
+			
+			  margin-left: 80px; /* 设置按钮距离左侧80像素 */  
+			
+			  margin-top: 20px;      
+			
+			  
+			
+			}
+			
+			 #zhengshi .biaoti1 {
+			
+			  
+			
+			  text-align: center;
+			
+			  color: #87ceeb
+			
+			  /*text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);  添加一个轻微的阴影以增强效果 */
+			
+			 }
+			
+			 table {
+			
+			   width: 100%;
+			
+			   border-collapse: collapse;
+			
+			   color: black;
+			
+			   font-size: 16p
+			
+			}
+			
+			 tr, td {
+			
+			   border: 1px solid black;
+			
+			}
+			
+			 ol, ul {
+			
+			  margin: 0; /* 移除默认的外边距 */
+			
+			  padding: 0; /* 移除默认的内边距 */
+			
+			  list-style-position: inside; /* 将列表标记放在文本内边距中 */
+			
+			}
+			
+			li {
+			
+			  margin: 0; /* 移除默认的外边距 */
+			
+			  padding: 0; /* 移除默认的内边距 */
+			
+			  line-height: 1.5; /* 设置行高，确保文本垂直居中 */
+			
+			  vertical-align: middle; /* 设置垂直对齐方式 */
+			
+			}
+			
+			   #output {
+			
+			    background-color: rgba(255, 255, 255, 0); /* 半透明背景 */
+			
+			    border: 1px solid #00008B; /* 边框 */
+			
+			    margin-top: 10px;
+			
+			    padding: 10px;
+			
+			    border-radius: 10px;
+			
+			    width: 94%;
+			
+			    height: 400px; /* 设置固定高度 */
+			
+			     /* 隐藏水平滚动条 */
+			
+			    overflow-y: auto; /* 当内容超过高度时显示垂直滚动条 */
+			
+			    word-wrap: break-word; /* 允许长单词或URL换行 */
+			
+			    white-space: pre-wrap; /* 保留空白，但允许适当换行 */
+			
+			}
+			
+			#output1 {
+			
+			    font-size: 16px;
+			
+			    margin: 0; /* 移除默认的margin */
+			
+			    white-space: pre-wrap; /* 保留空白，但允许适当换行 */
+			
+			}
+		    /*#an {
+              text-align: center;
+        }*/
+		</style>
+		<script>
+			function jiexi() {
+			
+			  var shuchu = document.getElementById("yulan").value;
+			
+			  yulan = shuchu
+			
+			    .replace(/\[color=([^\]]+)\](.*?)\[\/color\]/gi, function(match, color, content) {
+			
+			return '<span style="color: ' + color + '">' + content + '</span>';
+			
+			    })
+			
+			    .replace(/\[backcolor=([^\]]+)\](.*?)\[\/backcolor\]/gi, function(match, backcolor, content) {
+			
+			return '<span style="background-color: ' + backcolor + '">' + content + '</span>';
+			
+			    })
+			
+			    .replace(/\[size=(\d+)\](.*?)\[\/size\]/gi, function(match, size, content) {
+			
+			var fontSize;
+			
+			switch (size) {
+			
+			  case '1':
+			
+			    fontSize = '8px';
+			
+			    break;
+			
+			  case '2':
+			
+			    fontSize = '12px';
+			
+			    break;
+			
+			  case '3':
+			
+			    fontSize = '16px';
+			
+			    break;
+			
+			  case '4':
+			
+			    fontSize = '20px';
+			
+			    break;
+			
+			  case '5':
+			
+			    fontSize = '24px';
+			
+			    break;
+			
+			  case '6':
+			
+			    fontSize = '28px';
+			
+			    break;
+			
+			  case '7':
+			
+			    fontSize = '32px';
+			
+			    break;
+			
+			  case '8':
+			
+			    fontSize = '36px';
+			
+			    break;
+			
+			  default:
+			
+			    fontSize = '16px';
+			
+			    break;
+			
+			}
+			
+			return '<span style="font-size: ' + fontSize + '">' + content + '</span>';
+			
+			    })
+			
+			    .replace(/\[url=([^\]]+)\](.*?)\[\/url\]/gi, function(match, url, content) {
+			
+			return '<a href="' + url + '" target="_blank">' + content + '</a>';
+			
+			    })
+			
+			    .replace(/\[url\](.*?)\[\/url\]/gi, function(match, url) {
+			
+			return '<a href="' + url + '" target="_blank">' + url + '</a>';
+			
+			    })
+			
+			    .replace(/\[b\]/g, "<strong>")
+			
+			    .replace(/\[\/b\]/g, "</strong>")
+			
+			    .replace(/\[s\]/g, "<s>")
+			
+			    .replace(/\[\/s\]/g, "</s>")
+			
+			    .replace(/\[u\]/g, "<u>")
+			
+			    .replace(/\[\/u\]/g, "</u>")
+			
+			    .replace(/\[i\]/g, "<i>")
+			
+			    .replace(/\[\/i\]/g, "</i>")
+			
+			    .replace(/\[quote\](.*?)\[\/quote\]/gs, function(match, quoteContent) {
+			
+			return '<div style="border: 1px dashed orange; padding: 10px; margin: 10px 0; background-color: #ffe0a3; color: #d97008;">' + '回复 '+ quoteContent + '</div>';
+			
+			    })
+			
+			.replace(/\[table(?:=([^\]]+))?\](.*?)\[\/table\]/gs, function(match, params, tableContent) {
+			
+			  var tableStyle = '';
+			
+			  if (params) {
+			
+			    var widthMatch = params.match(/(\d+)(%|px)?/);
+			
+			    var colorMatch = params.match(/([#a-zA-Z0-9]+)(?:,|$)/);
+			
+			    if (widthMatch) {
+			
+			      tableStyle += 'width: ' + widthMatch[1] + (widthMatch[2] || 'px') + ';';
+			
+			    }
+			
+			    if (colorMatch) {
+			
+			      tableStyle += 'background-color: ' + colorMatch[1] + ';';
+			
+			    }
+			
+			  }
+			
+			  return '<table style="' + tableStyle + '">' + tableContent + '</table>';
+			
+			})
+			
+			    .replace(/\[tr\]/g, "<tr>")
+			
+			    .replace(/\[\/tr\]/g, "</tr>")
+			
+			    .replace(/\[td\]/g, "<td>")
+			
+			    .replace(/\[\/td\]/g, "</td>")
+			
+			    .replace(/\[code\](.*?)\[\/code\]/gs, function(match, codeContent) {
+			
+			// 将特殊字符转换为HTML实体
+			
+			var encodedContent = codeContent.replace(/&/g, '&amp;')
+			
+			                                .replace(/</g, '&lt;')
+			
+			                                .replace(/>/g, '&gt;')
+			
+			                                .replace(/"/g, '&quot;')
+			
+			                                .replace(/'/g, '&#39;');
+			
+			return '<div style="border: 1px solid lightblue; padding: 0; margin: 10px 0;">' +
+			
+			'<div style="background-color: yellow; color: white; text-align: center; padding: 5px;">代码内容</div>' +
+			
+			'<div style="background-color: #F5F5F5 ; padding: 10px;">' + encodedContent + '</div>' +
+			
+			'</div>';
+			
+			    })
+			
+			    .replace(/\[spoiler\](.*?)\[\/spoiler\]/gs, function(match, spoilerContent) {
+			
+			return '<div style="border: 1px solid #00008B; padding: 0; margin: 10px 0;">' +
+			
+			'<div style="background-color: blue; color: white; text-align: center; padding: 5px;">折叠内容</div>' +
+			
+			'<div style="background-color: white; color: black; padding: 10px;">' + spoilerContent + '</div>' +
+			
+			'</div>';
+			
+			})
+			
+			    .replace(/\[align=(left|center|right)\](.*?)\[\/align\]/gi, function(match, align, content) {
+			
+			return '<div style="text-align: ' + align + '">' + content + '</div>';
+			
+			    })
+			
+			    .replace(/\[list=1\](.*?)\[\/list\]/gs, function(match, listContent) {
+			
+			return '<ol>' + listContent.replace(/\[\*\](.*?)\n?/g, '<li>$1</li>') + '</ol>';
+			
+			    })
+			
+			    .replace(/\[list\](.*?)\[\/list\]/gs, function(match, listContent) {
+			
+			return '<ul>' + listContent.replace(/\[\*\](.*?)\n?/g, '<li>$1</li>') + '</ul>';
+			
+			    })
+			
+			    .replace(/\[img=([0-9]+),([0-9]+)\](.*?)\[\/img\]/gi, function(match, width, height, url) {
+			
+			return '<img src="' + url + '" style="width: ' + width + 'px; height: ' + height + 'px;">';
+			
+			    })
+			
+			    .replace(/\[img\](.*?)\[\/img\]/g, "<img src=\"$1\" style=\"max-width: 100%; height: auto;\">")
+			
+			    .replace(/\[\hr\]/g, "<hr>");
+			
+			  document.getElementById("output1").innerHTML = yulan;
+			
+			}
+			
+		</script>
+	</head>
+	<body>
+		<div id="qianyan">
+			<h1 class="biaoti">在 使 用 之 前</h1>
+			<p class="wen"><strong>BBcode</strong>是一种简单、易学的<strong>标记语言。</strong>主要用于论坛、在线社区和公告板等平台的文本格式化。它基于HTML，但相比之下更为简单，易于学习和使用。BBcode通过使用特殊的标签来对文本进行格式化，这些标签在显示时会转换为HTML代码，从而实现在网页上的格式化效果。BBcode的语法类似于Html,但是是[]不是&lt;&gt;。此工具可快速预览BBcode代码，让用户可查看排版并修复不足的排版。</p>
+		</div>
+		<div id="zhengshi">
+			<h1 class="biaoti">开 始 使 用</h1> <br> 
+            <textarea id="yulan" placeholder="请在这里输入你的BBcode代码"></textarea>
+            <div id="an"><button class="anniu" onclick="jiexi()">点击预览</button></div><br>
+			<h1 class="biaoti1">↓下面预览↓</h1>
+			<div id="output">
+				<pre id="output1"></pre>
+			</div>
+		</div> <br>
+	</body>
+	</html>
