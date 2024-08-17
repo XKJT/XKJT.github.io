@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>苦力怕Tid跳转器</title>
+    <style>
+      @font-face {
+        font-family: 'Minecraft';
+        src: url('minecraft.ttf') format('truetype');
+      }
+      body {
+        font-family: 'Minecraft', sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      #title0 {
+        color: orange;
+        text-align: center;
+        font-size: 24px;
+      }
+      div {
+        text-align: center;
+        color: blue;
+        font-size: 18px;
+        border-radius: 10px;
+        border: 2px solid yellow;
+        margin: 20px 0;
+        padding: 10px;
+      }
+      input[type="text"] {
+        border-radius: 10px;
+        width: 300px;
+        height: 24px;
+        padding: 5px;
+        font-size: 16px;
+      }
+      button {
+        margin-top: 10px;
+        border: 2px solid pink;
+        border-radius: 10px;
+        width: 80px;
+        height: 30px;
+        background-color: white;
+        font-size: 16px;
+      }
+
+      @media (min-width: 600px) {
+        #title0 {
+          font-size: 32px;
+        }
+        div {
+          width: 50%;
+          margin: 20px auto;
+        }
+        input[type="text"] {
+          width: 80%;
+        }
+        button {
+          width: 100px;
+        }
+      }
+
+      @media (min-width: 1000px) {
+        div {
+          width: 30%;
+        }
+      }
+    </style>
+    <script>
+      function tz4() {
+        var new2ui2 = document.getElementById("new2ui2").value;
+        var new2ui2f = new2ui2.split(' ');
+        if (new2ui2f.length >= 3) {
+          var new2ui2f1 = new2ui2f[0];
+          var new2ui2f2 = new2ui2f[1];
+          var new2ui2f3 = new2ui2f[2];
+          window.location.href = 'https://klpbbs.com/forum.php?mod=viewthread&tid=' + new2ui2f1 + '&page=' + new2ui2f2 + '&mobile=' + new2ui2f3 + '#pid10707322';
+        } else {
+          alert("请输入正确的格式：Tid 页数 模式");
+        }
+      }
+
+      function tz3() {
+        var new2ui1 = document.getElementById("new2ui1").value;
+        var new2ui1f = new2ui1.split(' ');
+        if (new2ui1f.length >= 2) {
+          var new2ui1f1 = new2ui1f[0];
+          var new2ui1f2 = new2ui1f[1];
+          window.location.href = 'https://klpbbs.com/forum.php?mod=viewthread&tid=' + new2ui1f1 + '&page=' + new2ui1f2 + '&mobile=2#pid10707322';
+        } else {
+          alert("请输入正确的格式：Tid 页数");
+        }
+      }
+
+      function tz() {
+        var tid = document.getElementById("jc1").value;
+        if (tid) {
+          window.location.href = 'https://klpbbs.com/thread-' + tid + '-1-1.html';
+        } else {
+          alert("请输入Tid！");
+        }
+      }
+
+      function jj() {
+        var tid2 = document.getElementById("jc2").value;
+        var tidf = tid2.split(' ');
+        if (tidf.length >= 2) {
+          var tidf1 = tidf[0];
+          var tidf2 = tidf[1];
+          window.location.href = 'https://klpbbs.com/forum.php?mod=viewthread&tid=' + tidf1 + '&page=1&extra=&mobile=' + tidf2 + '#pid10688665';
+        } else {
+          alert("请输入正确的格式：Tid 模式");
+        }
+      }
+
+      function uid() {
+        var uid = document.getElementById("uid").value;
+        if (uid) {
+          window.location.href = 'https://klpbbs.com/?' + uid;
+        } else {
+          alert("请输入uid！");
+        }
+      }
+    </script>
+  </head>
+  <body>	
+    <p id="title0">苦力怕Tid跳转器2.0</p>
+    <div id="new2u">
+      <p>[2.0新]Tid+页跳转</p>
+      <p>输入Tid+页数</br>如果只有一页或直跳到主题本身 后面为一即可</p>
+      <input type="text" id="new2ui1" class="new2u1"/></br>
+      <button id="tz3" class="tzv3" onclick="tz3()">跳转</button>
+    </div>
+    <div id="new2u2">
+      <p>[2.0新]Tid+页跳转+页面模式</p>
+      <p>输入Tid+页数+页面模式(2 手机/ no 电脑)</br>如果只有一页或直跳到主题本身 后面为一即可</p>
+      <input type="text" id="new2ui2" class="new2u2"/></br>
+      <button id="tz4" class="tzv4" onclick="tz4()">跳转</button>
+    </div>
+    <div id="jc">
+      <p>基础版本</p>
+      <p>输入Tid即可</p>
+      <input type="text" id="jc1" class="jcv1"/></br>
+      <button id="tz1" class="tzv1" onclick="tz()">跳转</button>
+    </div>
+    <div id="jj">
+      <p>进阶版本</p>
+      <p>Tid+空格+2或no（2是手机模式 no是电脑模式）</p>
+      <input type="text" id="jc2" class="jcv2"/></br>
+      <button id="tz2" class="tzv2" onclick="jj()">跳转</button>
+    </div>
+    <div id="muid">
+      <p>输入用户uid进入主页</p>
+      <p>输入用户uid即可</p>
+      <input type="text" id="uid" class="uid0"/></br>
+      <button id="uidi" class="uidi0" onclick="uid()">跳转</button>
+    </div>
+    <p style="text-align: center; margin-top: 20px; color: red;"><b>声明：此工具由苦力怕论坛用户制作，与苦力怕论坛无关。</b></p>
+    <p style="text-align: center; margin-top: 20px; color: blue;"><b>作者：星空晶体</b></p>
+    <p style="text-align: center; margin-top: 20px; color: grey;"><b>版本：KLPTID 2.0</b></p>
+    <a href="https://xkjt.github.io/tool/klptid/" style="font-weight: bold; text-decoration: none; color: grey;"><p style="text-align: center;">KLPTID1.0跳回</p></a>
+  </body>
+      </html>
